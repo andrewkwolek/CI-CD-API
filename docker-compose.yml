@@ -1,0 +1,10 @@
+services:
+  rest-api-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: andrewkwolek3/rest-api-server:main
+    container_name: rest-api-server
+    ports:
+      - "8082:8082"
+    restart: unless-stopped

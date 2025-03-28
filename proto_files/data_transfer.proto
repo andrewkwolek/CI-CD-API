@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package data_transfer;
+
+service ItemTransfer {
+    rpc GetItem(Item) returns (Item) {}
+    rpc SetItem(Item) returns (Item) {}
+}
+
+message Item {
+    int32 id = 1;
+    string name = 2;
+}
