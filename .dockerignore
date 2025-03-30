@@ -1,3 +1,4 @@
 *.md
 build
 .vscode
+__pycache__
