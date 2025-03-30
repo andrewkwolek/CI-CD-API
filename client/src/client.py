@@ -1,8 +1,7 @@
 # Save this as client/grpc_client.py
 
 import grpc
-from utils import data_transfer_pb2
-from utils import data_transfer_pb2_grpc
+from utils import data_transfer_pb2, data_transfer_pb2_grpc
 
 
 class ItemTransferClient:
