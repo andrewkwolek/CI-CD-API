@@ -112,14 +112,14 @@ exit 0
         
         stage('Build Images') {
             steps {
-                sh 'docker-compose build'
+                sh 'docker compose build'
             }
         }
         
         stage('Test') {
             steps {
                 // Start containers
-                sh 'docker-compose up -d'
+                sh 'docker compose up -d'
                 
                 // Add a delay to ensure services are up
                 sh 'sleep 15'
@@ -128,12 +128,12 @@ exit 0
                 sh './test-scripts/run_integration_tests.sh'
                 
                 // Stop containers
-                sh 'docker-compose down'
+                sh 'docker compose down'
             }
             post {
                 failure {
                     // Additional debugging in case of failure
-                    sh 'docker-compose logs'
+                    sh 'docker compose logs'
                 }
             }
         }
@@ -170,10 +170,10 @@ exit 0
             steps {
                 // For demonstration, we'll update the docker-compose file and restart the services
                 // In a real environment, you might use a Kubernetes deployment or other strategies
-                sh 'docker-compose down || true'
+                sh 'docker compose down || true'
                 sh "sed -i 's/andrewkwolek3\\/rest-api-server:main/andrewkwolek3\\/rest-api-server:${IMAGE_TAG}/g' docker-compose.yml"
                 sh "sed -i 's/andrewkwolek3\\/rest-api-client:main/andrewkwolek3\\/rest-api-client:${IMAGE_TAG}/g' docker-compose.yml"
-                sh 'docker-compose up -d'
+                sh 'docker compose up -d'
                 
                 // Verify deployment
                 sh 'sleep 10'
