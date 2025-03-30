@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from client.src.client import ItemTransferClient
+from client import ItemTransferClient
 import uvicorn
 
 app = FastAPI(title="Item Transfer REST API",

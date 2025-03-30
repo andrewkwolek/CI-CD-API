@@ -8,3 +8,24 @@ services:
     ports:
       - "8082:8082"
     restart: unless-stopped
+    networks:
+      - app-network
+
+  rest-api-client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: rest-api-client
+    ports:
+      - "8002:8002"
+    depends_on:
+      - rest-api-server
+    environment:
+      - GRPC_SERVER=rest-api-server:8082
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
