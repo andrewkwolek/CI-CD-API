@@ -27,7 +27,10 @@ public:
     
 
         if (table.find(request->id()) != table.end()) {
-            *response = *request;
+            Item* item;
+            item->set_id(id);
+            item->set_name(table[id]);
+            *response = *item;
             return Status::OK;
         }
         else {

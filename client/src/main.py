@@ -1,17 +1,21 @@
 # Save this as api.py
 
+import os
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from grpc_client import ItemTransferClient
 import uvicorn
 
-app = FastAPI(title="Item Transfer REST API",
-              description="REST API for gRPC Item Transfer service")
+app = FastAPI(
+    title="Item Transfer REST API",
+    description="REST API for gRPC Item Transfer service",
+)
 
 # Create a global client instance
 # In a production environment, you might want to use dependency injection
 # or a more sophisticated connection pool
-client = ItemTransferClient()
+server_address = os.environ.get("GRPC_SERVER", "localhost:8082")
+client = ItemTransferClient(server_address)
 
 # Pydantic model for Item
 
@@ -52,15 +56,6 @@ async def update_item(item_id: int, item: Item):
     result = client.set_item(item.id, item.name)
     return result
 
-
-@app.on_event("shutdown")
-def shutdown_event():
-    """
-    Close the gRPC channel when the app shuts down
-    """
-    client.close()
-
-
 if __name__ == "__main__":
     # Run with uvicorn
-    uvicorn.run("api:app", host="0.0.0.0", port=8002, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8002, reload=True)
