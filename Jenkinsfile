@@ -186,7 +186,7 @@ exit 0
     post {
         always {
             // Cleanup
-            sh 'docker-compose down || true'
+            sh 'docker compose down || true'
             sh 'docker system prune -f'
             deleteDir()
         }
