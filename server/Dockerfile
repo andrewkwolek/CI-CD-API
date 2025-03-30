@@ -5,11 +5,12 @@ RUN apt update && apt install -y libgrpc++-dev libgrpc-dev libprotobuf-dev proto
 
 WORKDIR /app
 COPY proto_files /app/proto_files
-COPY server/src /app/src
-COPY server/CMakeLists.txt /app
+COPY server/src /app/server/src
+COPY server/CMakeLists.txt /app/server
 
 WORKDIR /app/server
-RUN mkdir -p build && cd build 
+RUN mkdir -p build
+WORKDIR /app/server/build
 RUN cmake ..
 RUN make -j 4
 
