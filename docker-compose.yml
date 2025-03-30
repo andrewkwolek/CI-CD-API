@@ -2,7 +2,7 @@ services:
   rest-api-server:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: server/Dockerfile
     image: andrewkwolek3/rest-api-server:main
     container_name: rest-api-server
     ports:
