@@ -1,0 +1,10 @@
+[project]
+name = "grpc_client"
+version = "0.0.1"
+dependencies = [
+    "fastapi",
+    "pydantic",
+    "grpcio",
+    "grpcio-tools",
+    "uvicorn",
+]
